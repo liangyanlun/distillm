@@ -37,14 +37,14 @@ This script will replace the continuous `\n` in each document with a special tok
 
 Tokenize the data and store them in binary files:
 ```bash
-bash scripts/gpt2/tools/process_data_dolly.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
-bash scripts/gpt2/tools/process_data_pretrain.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Train / Validation Data
+bash scripts/gpt2/tools/process_data_dolly.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
+bash scripts/gpt2/tools/process_data_pretrain.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Train / Validation Data
 
-bash scripts/opt/tools/process_data_dolly.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
-bash scripts/opt/tools/process_data_pretrain.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Corpus Train / Validation Data
+bash scripts/opt/tools/process_data_dolly.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
+bash scripts/opt/tools/process_data_pretrain.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Corpus Train / Validation Data
 
-bash scripts/llama/tools/process_data_dolly.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
-bash scripts/llama/tools/process_data_pretrain.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Corpus Train / Validation Data
+bash scripts/llama/tools/process_data_dolly.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
+bash scripts/llama/tools/process_data_pretrain.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Corpus Train / Validation Data
 ```
 
 ## Base Pre-trained Models
@@ -60,84 +60,84 @@ The final checkpoints are selected by the **ROUGE-L** scores.
 
 #### Fine-tune the teacher models
 ```bash
-bash scripts/gpt2/sft/sft_xlarge.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/sft/sft_xlarge.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 #### SFT Baselines
 ```bash
-bash scripts/gpt2/sft/sft_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/sft/sft_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/sft/sft_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/sft/sft_base.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/sft/sft_medium.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/sft/sft_large.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 #### KD Baselines
 ```bash
-bash scripts/gpt2/kd/kd_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/kd/kd_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/kd/kd_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/kd/kd_base.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/kd/kd_medium.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/kd/kd_large.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 #### SeqKD Baselines
 Generate and process responses with the teacher:
 ```bash
-bash scripts/gpt2/tools/generate_data_seqkd.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/tools/process_pseudo_data_seqkd.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/tools/generate_data_seqkd.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/tools/process_pseudo_data_seqkd.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 Fine-tune the model with SeqKD:
 ```bash
-bash scripts/gpt2/seqkd/seqkd_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/seqkd/seqkd_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/seqkd/seqkd_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/seqkd/seqkd_base.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/seqkd/seqkd_medium.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/seqkd/seqkd_large.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 #### Student Initialization
 The final checkpoints are selected by the **validation loss**.
 ```bash
-bash scripts/gpt2/init/init_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/init/init_base.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/init/init_medium.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/init/init_large.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 #### ImitKD Baselines
 ```bash
-bash scripts/gpt2/imitkd/imitkd_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/imitkd/imitkd_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/imitkd/imitkd_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/imitkd/imitkd_base_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/imitkd/imitkd_medium_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/imitkd/imitkd_large_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 #### MiniLLM Baselines
 ```bash
-bash scripts/gpt2/minillm/train_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/minillm/train_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/minillm/train_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/minillm/train_base_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/minillm/train_medium_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/minillm/train_large_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 #### GKD Baselines
 ```bash
-bash scripts/gpt2/gkd/gkd_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/gkd/gkd_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/gkd/gkd_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/gkd/gkd_base_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/gkd/gkd_medium_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/gkd/gkd_large_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 ### DistiLLM
 The final checkpoints are selected by the **validation loss**.
 ```bash
-bash scripts/gpt2/init/init_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/init/init_base.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/init/init_medium.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/init/init_large.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 The final checkpoints are selected by the **ROUGE-L** scores.
 ```bash
-bash scripts/gpt2/distillm/train_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/distillm/train_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/distillm/train_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/distillm/train_base_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/distillm/train_medium_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
+bash scripts/gpt2/distillm/train_large_xl.sh ${DISTILLM_PATH} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 ## Run Evaluation
 ```bash
-bash scripts/gpt2/eval/run_eval.sh ${GPU_IDX} ${/PATH/TO/DistiLLM}
-bash scripts/opt/eval/run_eval.sh ${GPU_IDX} ${/PATH/TO/DistiLLM} 
-bash scripts/openllama2/eval/run_eval.sh ${GPU_IDX} ${/PATH/TO/DistiLLM} 
+bash scripts/gpt2/eval/run_eval.sh ${GPU_IDX} ${DISTILLM_PATH}
+bash scripts/opt/eval/run_eval.sh ${GPU_IDX} ${DISTILLM_PATH} 
+bash scripts/openllama2/eval/run_eval.sh ${GPU_IDX} ${DISTILLM_PATH} 
 ```
 
 ## Results
